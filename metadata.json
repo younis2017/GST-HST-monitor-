@@ -1,0 +1,6 @@
+{
+  "name": "Canada GST/HST & EI Self-Employed Tracker",
+  "description": "A professional income and expense tracking platform for self-employed Canadians. Monitor GST/HST collected and paid, generate professional invoices, view dashboard KPIs, and prepare CRA and EI-ready reports.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

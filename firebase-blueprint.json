@@ -1,0 +1,93 @@
+{
+  "entities": {
+    "user": {
+      "title": "User Profile",
+      "description": "User profile with business details and GST/HST registration info.",
+      "type": "object",
+      "properties": {
+        "businessName": { "type": "string" },
+        "gstNumber": { "type": "string" },
+        "province": { "type": "string" },
+        "address": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "eiTargetHours": { "type": "number" },
+        "eiClaimStartDate": { "type": "string" }
+      },
+      "required": ["email"]
+    },
+    "income": {
+      "title": "Income",
+      "description": "Income and sales records including GST/HST collected.",
+      "type": "object",
+      "properties": {
+        "date": { "type": "string" },
+        "clientName": { "type": "string" },
+        "description": { "type": "string" },
+        "subtotal": { "type": "number" },
+        "gstHstCollected": { "type": "number" },
+        "total": { "type": "number" },
+        "category": { "type": "string" },
+        "invoiceId": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["date", "clientName", "subtotal", "gstHstCollected", "total"]
+    },
+    "expense": {
+      "title": "Expense",
+      "description": "Expense records including GST/HST paid (Input Tax Credit).",
+      "type": "object",
+      "properties": {
+        "date": { "type": "string" },
+        "supplierName": { "type": "string" },
+        "description": { "type": "string" },
+        "category": { "type": "string" },
+        "subtotal": { "type": "number" },
+        "gstHstPaid": { "type": "number" },
+        "total": { "type": "number" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["date", "supplierName", "subtotal", "gstHstPaid", "total", "category"]
+    },
+    "invoice": {
+      "title": "Invoice",
+      "description": "Invoices generated for clients with GST/HST breakdown.",
+      "type": "object",
+      "properties": {
+        "invoiceNumber": { "type": "string" },
+        "clientName": { "type": "string" },
+        "clientEmail": { "type": "string" },
+        "clientAddress": { "type": "string" },
+        "dateIssued": { "type": "string" },
+        "dueDate": { "type": "string" },
+        "subtotal": { "type": "number" },
+        "gstHstRate": { "type": "number" },
+        "gstHstAmount": { "type": "number" },
+        "total": { "type": "number" },
+        "status": { "type": "string" },
+        "businessName": { "type": "string" },
+        "gstNumber": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["invoiceNumber", "clientName", "dateIssued", "dueDate", "subtotal", "gstHstRate", "gstHstAmount", "total", "status"]
+    }
+  },
+  "firestore": {
+    "users/{userId}": {
+      "schema": "user",
+      "description": "Self-employed user profile document"
+    },
+    "users/{userId}/incomes/{incomeId}": {
+      "schema": "income",
+      "description": "User income entries"
+    },
+    "users/{userId}/expenses/{expenseId}": {
+      "schema": "expense",
+      "description": "User expense entries"
+    },
+    "users/{userId}/invoices/{invoiceId}": {
+      "schema": "invoice",
+      "description": "User generated invoices"
+    }
+  }
+}

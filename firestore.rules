@@ -1,0 +1,24 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    function isSuperAdmin() {
+      return request.auth != null && (
+        request.auth.token.email == 'ywaa2025@gmail.com' || 
+        request.auth.token.email == 'youniswael2017@gmail.com'
+      );
+    }
+
+    match /users {
+      allow read, write: if isSuperAdmin();
+    }
+
+    match /users/{userId} {
+      allow read, write: if isSuperAdmin() || (request.auth.uid == userId);
+      
+      match /{document=**} {
+        allow read, write: if isSuperAdmin() || (request.auth.uid == userId);
+      }
+    }
+  }
+}
